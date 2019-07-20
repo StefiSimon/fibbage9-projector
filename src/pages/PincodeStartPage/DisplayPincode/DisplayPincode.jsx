@@ -2,7 +2,9 @@
 import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../../lib/refs';
 import screensEnum from '../../../lib/screensEnum';
+import { pincodeIcon } from '../../../assets/img/pincode_icon.svg';
 
+import './DisplayPincode.scss';
 import { getToupleFromSnapshot } from '../../../lib/firebaseUtils';
 
 const { game } = databaseRefs;
@@ -32,9 +34,12 @@ class DisplayPincode extends Component {
   render() {
     const { pincode } = this.props;
     return (
-      <Fragment>
-        Enter this pincode: {pincode}
-      </Fragment>
+      <div className="pincode-container">
+        <div className="display-text">
+          <div>Game pincode</div>
+          <span>{pincode}</span>
+        </div>
+      </div>
     )
   }
 };

@@ -1,0 +1,19 @@
+@import 'settings.colors.scss';
+@import 'settings.global.scss';
+
+.pincode-container {
+  .display-text {
+    font-weight: $global-weight-bold;
+    margin-top: 2em;
+    
+    div {
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+  
+    span {
+      font-size: 10em;
+      color: $color-main;
+    }
+  } 
+}

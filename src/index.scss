@@ -1,0 +1,11 @@
+@import 'settings.colors';
+
+html {
+  background-color: $color-white;
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  color: $color-dark;
+  background-color: $default-color-background;
+}

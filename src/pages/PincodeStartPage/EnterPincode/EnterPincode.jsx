@@ -1,7 +1,7 @@
     
 import React from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
-
+import './EnterPincode.scss';
 import Input from '../../../shared/Input/Input';
 
 const EnterPincode = ({ onSubmit }) => {

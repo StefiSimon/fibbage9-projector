@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
 
+import './FakeAnswersPage.scss';
+
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
 
 const { game, question } = databaseRefs;
@@ -65,14 +67,19 @@ class FakeAnswersPage extends Component {
   render() {
     const { currentQuestion, fakeAnswers } = this.state;
     return (
-      <Fragment>
-        <div>
-          Current question: {currentQuestion}
+      <div class="answers-page">
+        <div class="question">
+          {currentQuestion}
         </div>
-        {fakeAnswers.map(answer => (
-          <div>{answer}</div>
-        ))}
-      </Fragment>
+        <div class="answers">
+          {fakeAnswers.map((answer, index) => (
+            <div class="fake-answer">
+              <span class="counter">{`${index + 1}.`}</span>
+              <span>{answer}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     )
   }
 };

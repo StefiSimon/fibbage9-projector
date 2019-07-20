@@ -1,0 +1,28 @@
+@import 'settings.colors.scss';
+@import 'settings.global.scss';
+
+.answers-page {
+  font-weight: $global-weight-bold;
+  .question {
+    font-size: 1.5em;
+    margin-bottom: 2em;
+  }
+
+  .answers {
+    .fake-answer {
+      font-size: 2em;
+      color: $color-main;
+      margin-bottom: 1.5em;
+
+      span {
+        background-color: white;
+        padding: 16px 32px;
+        border-radius: 10px;
+      }
+
+      .counter {
+        margin-right: 20px;
+      }
+    }
+  }
+}

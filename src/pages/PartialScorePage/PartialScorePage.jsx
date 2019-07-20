@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
 
+import './PartialScorePage.scss';
+
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
 
 const { game } = databaseRefs;
@@ -58,15 +60,17 @@ class PartialScorePage extends Component {
 
   render() {
     return (
-      <Fragment>
-        Scores so far:
+      <div class="partial-score-page">
+        <div class="title"> 
+          Scores so far
+        </div>
         {this.getPlayersInfo().map(el => (
-          <div>
-            <span>Team: {el.nickname} </span>
-            <span>Score: {el.totalScore}</span>
+          <div class="team-card">
+            <div class="team-name">{el.nickname}</div>
+            <div>Score {el.totalScore}</div>
           </div>
         ))}
-      </Fragment>
+      </div>
     )
   }
 };
