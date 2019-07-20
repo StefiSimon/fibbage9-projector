@@ -11,3 +11,4 @@ lib/iconstats.json
 .yalc/
 yalc.lock
 .vscode
+package-lock.json
