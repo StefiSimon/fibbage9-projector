@@ -61,7 +61,7 @@ class QuestionPage extends Component {
     return (
       <Fragment>
         <div className="question-container">
-          <div class="question">
+          <div className="question">
             {currentQuestion}
           </div>
           <div class="question-points">

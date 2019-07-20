@@ -73,7 +73,7 @@ class FakeAnswersPage extends Component {
         </div>
         <div class="answers">
           {fakeAnswers.map((answer, index) => (
-            <div class="fake-answer">
+            <div key={index} class="fake-answer">
               <span class="counter">{`${index + 1}.`}</span>
               <span>{answer}</span>
             </div>

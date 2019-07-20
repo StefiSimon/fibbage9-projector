@@ -76,6 +76,9 @@ class QuestionResultsPage extends Component {
   getAuthorTeam = (teamId) => {
     const { players } = this.state;
     const authorPlayer = players.find(player => player[0] === teamId);
+
+    if (!authorPlayer) return '';
+
     const [key, data] = authorPlayer;
     return data.nickname ? data.nickname : '';
   }
@@ -91,18 +94,18 @@ class QuestionResultsPage extends Component {
   render() {
     const { currentQuestion, fakeAnswers } = this.state;
     return (
-      <div class="question-results-page">
-        <div class="question">
+      <div className="question-results-page">
+        <div className="question">
           Answers for {`"${currentQuestion}" :`}
         </div>
-        {fakeAnswers.map(answer => (
-          <div class="answer-info-card">
-            <div class="answer">{answer.value}</div>
-            <div class="author">Added by <span>{this.getAuthorTeam(answer.authorTeam)}</span></div>
-            <div class="votes">Number of votes {answer.voteCount}</div>
-            <div class="team-votes">
+        {fakeAnswers.map((answer, i) => (
+          <div key={i} className="answer-info-card">
+            <div className="answer">{answer.value}</div>
+            <div className="author">Added by <span>{this.getAuthorTeam(answer.authorTeam)}</span></div>
+            <div className="votes">Number of votes {answer.voteCount}</div>
+            <div className="team-votes">
               {"Voted by "} 
-              {this.getVoterTeams(answer.votedBy).map(team => <span>{`${ team } `}</span>)}
+              {this.getVoterTeams(answer.votedBy).map((team, i) => <span key={i}>{`${ team } `}</span>)}
             </div>
           </div>
         ))}
