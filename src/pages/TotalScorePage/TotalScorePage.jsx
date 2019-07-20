@@ -22,16 +22,6 @@ class TotalScorePage extends Component {
     } = this.props;
     this.gameRef = game(gameId);
 
-    this.gameRef.child("/currentScreen").on("value", snapshot => {
-      const { history } = this.props;
-      if (snapshot.val()) {
-        const { screenId, route } = snapshot.val();
-        if (screenId === screensEnum.ANSWER) {
-          history.push(route);
-        }
-      }
-    })
-
     this.gameRef.child("/players").on("value", snapshot => {
       if (snapshot.val()) {
         this.setState({
