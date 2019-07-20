@@ -1,0 +1,35 @@
+@import 'settings.colors.scss';
+@import 'settings.global.scss';
+
+.question-results-page {
+
+  .question {
+    font-size: 1.5em;
+    margin-bottom: 2em;
+  }
+
+  .answer-info-card {
+    background-color: white;
+    padding: 16px 32px;
+    border-radius: 10px;
+    margin-bottom: 1.5em;
+
+    .answer {
+      color: $color-main;
+      font-size: 2em;
+      font-weight: $global-weight-bold;
+    }
+
+    .author {
+      span {
+        color: $color-main;
+      }
+    }
+
+    .team-votes {
+      span {
+        color: $color-main;
+      }
+    }
+  }
+}

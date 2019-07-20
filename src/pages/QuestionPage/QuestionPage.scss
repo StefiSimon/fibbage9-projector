@@ -1,0 +1,24 @@
+@import 'settings.colors.scss';
+@import 'settings.global.scss';
+
+.question-container {
+  font-weight: $global-weight-bold;
+
+  .question {
+    color: $color-main;
+    font-size: 5em;
+  }
+
+  .question-points{
+    margin-top: 1em;
+    font-size: 2.5em;
+    span {
+      color: $color-main;
+    }
+  }
+
+  .question-indications {
+    margin-top: 2em;
+    color: $color-gray;
+  }
+}

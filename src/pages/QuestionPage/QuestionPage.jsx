@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
 
+import './QuestionPage.scss';
+
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
 
 const { game, question } = databaseRefs;
@@ -58,11 +60,19 @@ class QuestionPage extends Component {
     const { currentQuestion, currentScore } = this.state;
     return (
       <Fragment>
-        <div>
-          Current question: {currentQuestion}
-        </div>
-        <div>
-          Current score: {currentScore}
+        <div className="question-container">
+          <div class="question">
+            {currentQuestion}
+          </div>
+          <div class="question-points">
+            Points for this question: <span>{currentScore}</span>
+          </div>
+          <div class="question-indications">
+            Answer the question now, preferably with
+            some bullshit answer to trick other
+            team into picking your bullshit and get
+            points when they do it
+          </div>
         </div>
       </Fragment>
     )

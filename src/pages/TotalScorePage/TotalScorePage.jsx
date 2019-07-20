@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
 
+import './TotalScorePage.scss';
+
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
 
 const { game } = databaseRefs;
@@ -58,22 +60,26 @@ class TotalScorePage extends Component {
 
   render() {
     return (
-      <Fragment>
-        WINNERS ARE:
+      <div class="total-score-page">
+        <div class="score-header">
+          Winners
+        </div>
         {this.getWinners().map(el => (
-          <div>
-            <span>Team: {el.nickname} </span>
-            <span>Score: {el.totalScore}</span>
+          <div class="winner-group">
+            <div>{el.nickname} </div>
+            <div>Final score: {el.totalScore}</div>
           </div>
         ))}
-        Congrats also to everyone:
+        <div class="score-header">
+          Congrats to everyone else
+        </div>
         {this.getOtherPlayers().map(el => (
-          <div>
-            <span>Team: {el.nickname} </span>
-            <span>Score: {el.totalScore}</span>
+          <div class="team-group">
+            <div>{el.nickname} </div>
+            <div>Score: {el.totalScore}</div>
           </div>
         ))}
-      </Fragment>
+      </div>
     )
   }
 };

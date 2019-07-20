@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
 
+import './QuestionResultsPage.scss';
+
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
 
 const { game, question } = databaseRefs;
@@ -89,21 +91,22 @@ class QuestionResultsPage extends Component {
   render() {
     const { currentQuestion, fakeAnswers } = this.state;
     return (
-      <Fragment>
-        <div>
-          Current question: {currentQuestion}
+      <div class="question-results-page">
+        <div class="question">
+          Answers for {`"${currentQuestion}" :`}
         </div>
         {fakeAnswers.map(answer => (
-          <Fragment>
-            <div>Answer: {answer.value}</div>
-            <div>Author team: {this.getAuthorTeam(answer.authorTeam)}</div>
-            <div>Number of votes: {answer.voteCount}</div>
-            <div>Teams who voted: 
-              {this.getVoterTeams(answer.votedBy).map(team => <span>{`${team} `}</span>)}
+          <div class="answer-info-card">
+            <div class="answer">{answer.value}</div>
+            <div class="author">Added by <span>{this.getAuthorTeam(answer.authorTeam)}</span></div>
+            <div class="votes">Number of votes {answer.voteCount}</div>
+            <div class="team-votes">
+              {"Voted by "} 
+              {this.getVoterTeams(answer.votedBy).map(team => <span>{`${ team } `}</span>)}
             </div>
-          </Fragment>
+          </div>
         ))}
-      </Fragment>
+      </div>
     )
   }
 };
