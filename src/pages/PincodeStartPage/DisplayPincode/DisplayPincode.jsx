@@ -1,6 +1,7 @@
     
 import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../../lib/refs';
+import screensEnum from '../../../lib/screensEnum';
 
 import { getToupleFromSnapshot } from '../../../lib/firebaseUtils';
 
@@ -16,8 +17,10 @@ class DisplayPincode extends Component {
     this.gameRef.child("/currentScreen").on("value", snapshot => {
       const { history } = this.props;
       if (snapshot.val()) {
-        const { route } = snapshot.val();
-        history.push(route);
+        const { screenId, route } = snapshot.val();
+        if (screenId === screensEnum.ANSWER) {
+          history.push(route);
+        }
       }
     })
   }
