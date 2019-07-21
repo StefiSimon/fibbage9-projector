@@ -1,11 +1,10 @@
-    
+
 import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
-
-import './FakeAnswersPage.scss';
-
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
+import Timer from '../../shared/Timer';
+import './FakeAnswersPage.scss';
 
 const { game, question } = databaseRefs;
 
@@ -15,7 +14,8 @@ class FakeAnswersPage extends Component {
 
   state = {
     currentQuestion: '',
-    fakeAnswers: []
+    fakeAnswers: [],
+    endTimeDate: ''
   }
 
   getAnswersList = (toupleList, correctAnswer) => {
@@ -52,6 +52,10 @@ class FakeAnswersPage extends Component {
     this.gameRef = game(gameId);
     this.questionRef = question(gameId, questionId);
 
+    this.gameRef.child("/timer/endTime").on("value", snapshot => {
+      this.setState({ endTimeDate: snapshot.val() })
+    });
+
     this.gameRef.child("/currentScreen").on("value", snapshot => {
       const { history } = this.props;
       if (snapshot.val()) {
@@ -83,21 +87,29 @@ class FakeAnswersPage extends Component {
   }
 
   render() {
-    const { currentQuestion, fakeAnswers = [] } = this.state;
+    const { currentQuestion, fakeAnswers = [], endTimeDate } = this.state;
     return (
-      <div className="answers-page">
-        <div className="question">
-          {currentQuestion}
+      <Fragment>
+        {endTimeDate &&
+          <Timer
+            endTime={endTimeDate}
+            onTimerEnd={() => this.setState({ endTimeDate: '' })}
+          />
+        }
+        <div className="answers-page">
+          <div className="question">
+            {currentQuestion}
+          </div>
+          <div className="answers">
+            {fakeAnswers.map((answer, index) => (
+              <div key={index} className="fake-answer">
+                <span className="counter">{`${index + 1}.`}</span>
+                <span>{answer}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="answers">
-          {fakeAnswers.map((answer, index) => (
-            <div key={index} className="fake-answer">
-              <span className="counter">{`${index + 1}.`}</span>
-              <span>{answer}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      </Fragment>
     )
   }
 };
