@@ -73,6 +73,8 @@ class QuestionResultsPage extends Component {
 
   componentWillUnmount() {
     this.gameRef.off("value");
+    this.gameRef.child("/players").off('value');
+    this.gameRef.child("/currentScreen").off('value');
     this.questionRef.off("value");
   }
 

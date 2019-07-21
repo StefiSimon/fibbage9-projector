@@ -63,6 +63,8 @@ class QuestionPage extends Component {
   componentWillUnmount() {
     if (this.gameRef) {
       this.gameRef.off();
+      this.gameRef.child('/timer/endTime').off('value');
+      this.gameRef.child("/currentScreen").off('value');
     }
 
     if (this.questionRef) {

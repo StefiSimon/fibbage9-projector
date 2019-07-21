@@ -28,6 +28,7 @@ class DisplayPincode extends Component {
 
   componentWillUnmount() {
     this.gameRef.off("value");
+    this.gameRef.child("/currentScreen").off("value");
   }
 
   render() {

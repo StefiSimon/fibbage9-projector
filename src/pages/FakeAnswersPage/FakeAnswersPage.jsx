@@ -85,6 +85,8 @@ class FakeAnswersPage extends Component {
 
   componentWillUnmount() {
     this.gameRef.off("value");
+    this.gameRef.child("/timer/endTime").off("value");
+    this.gameRef.child("/currentScreen").off("value");
     this.questionRef.off("value");
   }
 

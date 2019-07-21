@@ -46,7 +46,9 @@ class PartialScorePage extends Component {
   }
 
   componentWillUnmount() {
-    this.gameRef.off("value");
+    this.gameRef.on("value");
+    this.gameRef.child("/currentScreen").off("value");
+    this.gameRef.child("/players").off("value");
   }
 
   sortPlayersByScore = (players) => players.sort((player1, player2) => player2.totalScore - player1.totalScore);
