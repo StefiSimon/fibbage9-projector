@@ -18,13 +18,30 @@ class FakeAnswersPage extends Component {
     fakeAnswers: []
   }
 
-  getAnswersList = (toupleList) => {
+  getAnswersList = (toupleList, correctAnswer) => {
     const list = getToupleFromSnapshot(toupleList);
     return list.map(item => {
       const [key, data] = item;
       return data && data.value ? data.value : '';
-    })
+    });
   }
+
+  shuffleAnswers = (fakeAnswers, truth) => {
+    const allAnswers = [...fakeAnswers, truth];
+
+    const sorted = allAnswers.sort((a, b) => {
+      const firstValue = a.value ? a.value.toLowerCase() : a[1].value;
+      const secondValue = b.value ? b.value.toLowerCase() : b[1].value;
+
+      if (firstValue < secondValue) {
+        return -1;
+      } else if (firstValue > secondValue) {
+        return 1;
+      }
+      return 0;
+    });
+    return sorted;
+  };
 
   componentDidMount() {
     const {
@@ -48,11 +65,12 @@ class FakeAnswersPage extends Component {
     this.questionRef.on("value", snapshot => {
       const questionObj = snapshot.val();
       if (questionObj) {
-        const { question, fakeAnswers } = questionObj;
+        const { question, fakeAnswers, answer: { value = '' } } = questionObj;
         if (question && fakeAnswers) {
+          const fakeAnswersInfo = this.getAnswersList(fakeAnswers);
           this.setState({
             currentQuestion: question,
-            fakeAnswers: this.getAnswersList(fakeAnswers)
+            fakeAnswers: this.shuffleAnswers(fakeAnswersInfo, value)
           })
         }
       }
@@ -65,16 +83,16 @@ class FakeAnswersPage extends Component {
   }
 
   render() {
-    const { currentQuestion, fakeAnswers } = this.state;
+    const { currentQuestion, fakeAnswers = [] } = this.state;
     return (
-      <div class="answers-page">
-        <div class="question">
+      <div className="answers-page">
+        <div className="question">
           {currentQuestion}
         </div>
-        <div class="answers">
+        <div className="answers">
           {fakeAnswers.map((answer, index) => (
-            <div key={index} class="fake-answer">
-              <span class="counter">{`${index + 1}.`}</span>
+            <div key={index} className="fake-answer">
+              <span className="counter">{`${index + 1}.`}</span>
               <span>{answer}</span>
             </div>
           ))}
