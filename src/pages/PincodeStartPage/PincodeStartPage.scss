@@ -1,0 +1,17 @@
+@import 'settings.colors.scss';
+@import 'settings.global.scss';
+@import 'tools.mq';
+
+.startpage-container {
+  .startpage-img {
+    right: 5%;
+    bottom: 2.5%;
+    position: absolute;
+    width: 40%;
+    opacity: 0.6;
+  }
+  @include mq($from: tablet) {
+    width: 50%;
+    margin: 0 auto;
+  }
+} 

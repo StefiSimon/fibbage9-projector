@@ -2,10 +2,12 @@
 import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
-
+import QuestionMark from '../../components/QuestionMark/QuestionMark';
 import './QuestionPage.scss';
 
+import questionSvg from '../../assets/img/question.svg';
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
+
 
 const { game, question } = databaseRefs;
 
@@ -61,6 +63,10 @@ class QuestionPage extends Component {
     return (
       <Fragment>
         <div className="question-container">
+          <QuestionMark style={{top: "30px",right:"30px"}} className="down"></QuestionMark>
+          <QuestionMark style={{top:"50%", right:"90%"}} className="up"></QuestionMark>
+          <QuestionMark style={{top:"10%", right:"50%"}} className="down"></QuestionMark>
+          <img src={questionSvg} alt="question" className="question-svg" />
           <div className="question">
             {currentQuestion}
           </div>

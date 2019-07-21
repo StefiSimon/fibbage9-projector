@@ -1,0 +1,13 @@
+
+.rocket-container {
+  width: 40%;
+  position: absolute;
+  right: 5%;
+  pointer-events: none;
+  opacity: 0.8;
+
+  img {
+    position: absolute;
+    bottom: 0;
+  }
+}

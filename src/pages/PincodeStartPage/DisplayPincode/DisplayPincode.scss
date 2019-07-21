@@ -3,15 +3,14 @@
 
 .pincode-container {
   .display-text {
-    font-weight: $global-weight-bold;
-    margin-top: 2em;
+    margin-top: 5%;
     
     div {
       font-size: 2em;
-      margin-bottom: 1em;
     }
   
     span {
+      font-weight: $global-weight-bold;
       font-size: 10em;
       color: $color-main;
     }

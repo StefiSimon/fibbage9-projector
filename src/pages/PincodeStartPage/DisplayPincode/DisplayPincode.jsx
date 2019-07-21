@@ -15,7 +15,6 @@ class DisplayPincode extends Component {
   componentDidMount() {
     const { gameId } = this.props;
     this.gameRef = game(gameId);
-
     this.gameRef.child("/currentScreen").on("value", snapshot => {
       const { history } = this.props;
       if (snapshot.val()) {

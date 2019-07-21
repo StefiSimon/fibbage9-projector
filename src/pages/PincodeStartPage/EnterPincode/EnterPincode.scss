@@ -1,3 +1,10 @@
+@import 'settings.colors.scss';
+
 .page-transition-elem {
-  font-size: 2em;
+  font-size: 1.5em;
+}
+
+.pincode-info {
+  z-index: 100;
+  color: $color-gray;
 }

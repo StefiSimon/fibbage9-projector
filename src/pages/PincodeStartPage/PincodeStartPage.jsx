@@ -3,6 +3,10 @@ import { databaseRefs } from '../../lib/refs';
 import EnterPincode from './EnterPincode/EnterPincode';
 import DisplayPincode from './DisplayPincode/DisplayPincode';
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
+import Rocket from '../../components/Rocket/Rocket';
+import Moon from '../../components/Moon/Moon';
+
+import './PincodeStartPage.scss';
 
 const { games } = databaseRefs;
 
@@ -11,7 +15,8 @@ class PincodeStartPage extends Component {
     activeGames: [],
     hasPincode: false,
     pincode: 0,
-    gameId: ''
+    gameId: '',
+    rocketActive: false
   }
 
   componentDidMount() {
@@ -76,12 +81,16 @@ class PincodeStartPage extends Component {
     const { history } = this.props;
     const { hasPincode, pincode, gameId } = this.state;
     return (
-      <Fragment>
+      <div className="startpage-container">
+        <Rocket active={false} />
+        <Moon top="30px" right="10px" width="75px" height="75px" />
+        <Moon top="50px" left="50%" />
+        <Moon left="10%" top="350px" width="50px" height="50px" />
         { hasPincode ? 
             <DisplayPincode history={history} pincode={pincode} gameId={gameId} /> : 
             <EnterPincode onSubmit={this.handleInsertPincode} />
         }
-      </Fragment>
+      </div>
     )
   }
 }
