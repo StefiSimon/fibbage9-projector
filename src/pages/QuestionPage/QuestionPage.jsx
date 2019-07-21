@@ -1,12 +1,14 @@
-    
+
 import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
 import QuestionMark from '../../components/QuestionMark/QuestionMark';
-import './QuestionPage.scss';
 
 import questionSvg from '../../assets/img/question.svg';
+import Timer from '../../shared/Timer';
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
+
+import './QuestionPage.scss';
 
 
 const { game, question } = databaseRefs;
@@ -17,7 +19,8 @@ class QuestionPage extends Component {
 
   state = {
     currentScore: 0,
-    currentQuestion: ''
+    currentQuestion: '',
+    endTimeDate: '',
   }
 
   componentDidMount() {
@@ -28,6 +31,10 @@ class QuestionPage extends Component {
     } = this.props;
     this.gameRef = game(gameId);
     this.questionRef = question(gameId, questionId);
+
+    this.gameRef.child('/timer/endTime').on('value', snapshot => {
+      this.setState({ endTimeDate: snapshot.val() })
+    });
 
     this.gameRef.child("/currentScreen").on("value", snapshot => {
       const { history } = this.props;
@@ -54,26 +61,37 @@ class QuestionPage extends Component {
   }
 
   componentWillUnmount() {
-    this.gameRef.off("value");
-    this.questionRef.off("value");
+    if (this.gameRef) {
+      this.gameRef.off();
+    }
+
+    if (this.questionRef) {
+      this.questionRef.off();
+    }
   }
 
   render() {
-    const { currentQuestion, currentScore } = this.state;
+    const { currentQuestion, currentScore, endTimeDate } = this.state;
     return (
       <Fragment>
+        {endTimeDate &&
+          <Timer
+            endTime={endTimeDate}
+            onTimerEnd={() => this.setState({ endTimeDate: '' })}
+          />
+        }
         <div className="question-container">
-          <QuestionMark style={{top: "30px",right:"30px"}} className="down"></QuestionMark>
-          <QuestionMark style={{top:"50%", right:"90%"}} className="up"></QuestionMark>
-          <QuestionMark style={{top:"10%", right:"50%"}} className="down"></QuestionMark>
+          <QuestionMark style={{ top: "30px", right: "30px" }} className="down"></QuestionMark>
+          <QuestionMark style={{ top: "50%", right: "90%" }} className="up"></QuestionMark>
+          <QuestionMark style={{ top: "10%", right: "50%" }} className="down"></QuestionMark>
           <img src={questionSvg} alt="question" className="question-svg" />
           <div className="question">
             {currentQuestion}
           </div>
-          <div class="question-points">
+          <div className="question-points">
             Points for this question: <span>{currentScore}</span>
           </div>
-          <div class="question-indications">
+          <div className="question-indications">
             Answer the question now, preferably with
             some bullshit answer to trick other
             team into picking your bullshit and get
