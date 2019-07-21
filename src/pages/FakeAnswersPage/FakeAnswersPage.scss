@@ -2,22 +2,40 @@
 @import 'settings.global.scss';
 
 .answers-page {
-  font-weight: $global-weight-bold;
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  bottom: 24px;
+
   .question {
-    font-size: 1.5em;
-    margin-bottom: 2em;
+    font-size: 1.6em;
+    margin-bottom: 24px;
+  }
+
+  .answer-line {
+    opacity: 0.8;
+    position: absolute;
+    z-index: 1;
   }
 
   .answers {
+    width: 100%;
     .fake-answer {
+      display: flex;
+      justify-content: space-between;
       font-size: 2em;
       color: $color-main;
-      margin-bottom: 1.5em;
+      margin-bottom: 16px;
+      font-weight: $global-weight-bold;
 
-      span {
+      div {
         background-color: white;
         padding: 16px 32px;
         border-radius: 10px;
+      }
+
+      .answer-square {
+        width: 90%;
       }
 
       .counter {

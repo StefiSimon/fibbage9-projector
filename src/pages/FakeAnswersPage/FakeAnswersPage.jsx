@@ -1,7 +1,9 @@
     
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
+
+import answerSvg from '../../assets/img/answer_svg.svg';
 
 import './FakeAnswersPage.scss';
 
@@ -28,15 +30,17 @@ class FakeAnswersPage extends Component {
 
   shuffleAnswers = (fakeAnswers, truth) => {
     const allAnswers = [...fakeAnswers, truth];
-
-    const sorted = allAnswers.sort((a, b) => {
-      const firstValue = a.value ? a.value.toLowerCase() : a[1].value;
-      const secondValue = b.value ? b.value.toLowerCase() : b[1].value;
-
-      if (firstValue < secondValue) {
-        return -1;
-      } else if (firstValue > secondValue) {
-        return 1;
+    const removeEmpty = allAnswers.filter(answer => !!answer);
+    const sorted = removeEmpty.sort((a, b) => {
+      if (a && b) {
+        const firstValue = a.value ? a.value.toLowerCase() : a[1].value;
+        const secondValue = b.value ? b.value.toLowerCase() : b[1].value;
+  
+        if (firstValue < secondValue) {
+          return -1;
+        } else if (firstValue > secondValue) {
+          return 1;
+        }
       }
       return 0;
     });
@@ -92,8 +96,9 @@ class FakeAnswersPage extends Component {
         <div className="answers">
           {fakeAnswers.map((answer, index) => (
             <div key={index} className="fake-answer">
-              <span className="counter">{`${index + 1}.`}</span>
-              <span>{answer}</span>
+              <div className="counter">{index + 1}</div>
+              <img src={answerSvg} alt="img" className="answer-line" />
+              <div className="answer-square">{answer}</div>
             </div>
           ))}
         </div>
