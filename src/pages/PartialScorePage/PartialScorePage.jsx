@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
 
+import piechartSvg from '../../assets/img/piechart.svg';
+
 import './PartialScorePage.scss';
 
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
@@ -60,14 +62,20 @@ class PartialScorePage extends Component {
 
   render() {
     return (
-      <div class="partial-score-page">
-        <div class="title"> 
+      <div className="partial-score-page">
+        <img src={piechartSvg} className="score-img" alt="piechart" />
+        <div className="title"> 
           Scores so far
         </div>
         {this.getPlayersInfo().map(el => (
-          <div class="team-card">
-            <div class="team-name">{el.nickname}</div>
-            <div>Score {el.totalScore}</div>
+          <div className="team-card">
+            <div className="team-name">{el.nickname}</div>
+            <div className="score">
+              <span>
+                {`${el.totalScore}  `} 
+              </span>
+              points
+            </div>
           </div>
         ))}
       </div>

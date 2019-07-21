@@ -1,23 +1,52 @@
 @import 'settings.colors.scss';
 @import 'settings.global.scss';
 
+.image {
+  opacity: 0.8;
+  width: 25%;
+  position: fixed;
+  right: 8px;
+  bottom: 10px;
+}
+
 .question-results-page {
+  height: 100%;
+  width: 60%;
+  margin: 0 auto;
+  position: relative;
+  bottom: 24px;
 
   .question {
     font-size: 1.5em;
-    margin-bottom: 2em;
+    margin-bottom: 16px;
   }
 
   .answer-info-card {
     background-color: white;
     padding: 16px 32px;
     border-radius: 10px;
-    margin-bottom: 1.5em;
+    margin-bottom: 16px;
+
+    &.correct {
+      background-color: $color-success;
+      color: white;
+      font-weight: $global-weight-bold;
+
+      .answer {
+        color: white;
+      }
+      .team-votes {
+        span {
+          color: white;
+        }
+      }
+    }
 
     .answer {
       color: $color-main;
       font-size: 2em;
       font-weight: $global-weight-bold;
+      word-break: break-word;
     }
 
     .author {

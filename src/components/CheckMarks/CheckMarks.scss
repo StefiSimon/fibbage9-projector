@@ -22,7 +22,10 @@
   }
 }
 
-.questionmark {
+.checkmark {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   &.up {
     animation: floatUp 6s ease-in-out infinite;
   }
@@ -30,5 +33,4 @@
   &.down {
     animation: floatDown 6s ease-in-out infinite;
   }
-  position: absolute;
 }

@@ -2,10 +2,11 @@
 import React, { Component, Fragment } from 'react';
 import { databaseRefs } from '../../lib/refs';
 import screensEnum from '../../lib/screensEnum';
-
+import checkmarkSvg from '../../assets/img/checkmark.svg';
 import './QuestionResultsPage.scss';
 
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
+import CheckMarks from '../../components/CheckMarks/CheckMarks';
 
 const { game, question } = databaseRefs;
 
@@ -16,7 +17,8 @@ class QuestionResultsPage extends Component {
   state = {
     currentQuestion: '',
     fakeAnswers: [],
-    players: []
+    players: [],
+    correctAnswer: {}
   }
 
   getAnswersList = (toupleList) => {
@@ -57,11 +59,12 @@ class QuestionResultsPage extends Component {
     this.questionRef.on("value", snapshot => {
       const questionObj = snapshot.val();
       if (questionObj) {
-        const { question, fakeAnswers } = questionObj;
+        const { question, fakeAnswers, answer } = questionObj;
         if (question && fakeAnswers) {
           this.setState({
             currentQuestion: question,
-            fakeAnswers: this.getAnswersList(fakeAnswers)
+            fakeAnswers: this.getAnswersList(fakeAnswers),
+            correctAnswer: answer
           })
         }
       }
@@ -92,23 +95,35 @@ class QuestionResultsPage extends Component {
   }
 
   render() {
-    const { currentQuestion, fakeAnswers } = this.state;
+    const { currentQuestion, fakeAnswers, correctAnswer: { value, votedBy } } = this.state;
+    const correctAnswerVotes = this.getVoterTeams(votedBy);
     return (
-      <div className="question-results-page">
-        <div className="question">
-          Answers for {`"${currentQuestion}" :`}
-        </div>
-        {fakeAnswers.map((answer, i) => (
-          <div key={i} className="answer-info-card">
-            <div className="answer">{answer.value}</div>
-            <div className="author">Added by <span>{this.getAuthorTeam(answer.authorTeam)}</span></div>
-            <div className="votes">Number of votes {answer.voteCount}</div>
+      <div>
+        <img src={checkmarkSvg} alt="checkmark" className="image" />
+        <CheckMarks className="up" style={{ top: '40%', right: '80%', width: '150px' }}/>
+        <CheckMarks className="down" style={{ top: '10%', left: '80%', width: '100px' }}/>
+        <div className="question-results-page">
+          <div className="question">
+            Answers for {`"${currentQuestion}" :`}
+          </div>
+          <div className="answer-info-card correct">
+            <div className="answer">{value}</div>
             <div className="team-votes">
-              {"Voted by "} 
-              {this.getVoterTeams(answer.votedBy).map((team, i) => <span key={i}>{`${ team } `}</span>)}
+            {`Voted by ${correctAnswerVotes.length} teams: `} 
+              {correctAnswerVotes.map((team, i) => <span key={i}>{`${ team } `}</span>)}
             </div>
           </div>
-        ))}
+          {fakeAnswers.map((answer, i) => (
+            <div key={i} className="answer-info-card">
+              <div className="answer">{answer.value}</div>
+              <div className="author">Added by <span>{this.getAuthorTeam(answer.authorTeam)}</span></div>
+              <div className="team-votes">
+                {`Voted by ${answer.voteCount} teams: `} 
+                {this.getVoterTeams(answer.votedBy).map((team, i) => <span key={i}>{`${ team } `}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     )
   }
