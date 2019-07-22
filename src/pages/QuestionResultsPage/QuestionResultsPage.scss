@@ -16,25 +16,39 @@
   position: relative;
   bottom: 24px;
 
+  .animal-svg {
+    height: 15vh;
+    width: 20%;
+  }
+
   .question {
     font-size: 1.5em;
     margin-bottom: 16px;
   }
 
   .answer-info-card {
+    display: flex;
+    justify-content: space-between;
     background-color: white;
     padding: 16px 32px;
     border-radius: 10px;
     margin-bottom: 16px;
 
+    .answer-info {
+      width: 80%;
+    }
+
     &.correct {
+      display: block;
       background-color: $color-success;
       color: white;
       font-weight: $global-weight-bold;
 
       .answer {
         color: white;
+        margin-bottom: 0;
       }
+
       .team-votes {
         span {
           color: white;
@@ -56,8 +70,17 @@
     }
 
     .team-votes {
+      display: flex;
+      align-items: center;
+
       span {
         color: $color-main;
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+      .voter-animal {
+        height: 5vh;
+        width: 50px; 
       }
     }
   }

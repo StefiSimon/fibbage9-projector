@@ -18,7 +18,6 @@
 .partial-score-page {
   width: 50%;
   margin: 0 auto;
-  position: relative;
   bottom: 24px;
 
   .score-img {
@@ -44,8 +43,12 @@
     animation: fadeInLeftBig 2s;
     z-index: 10;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+
+    .animal-svg {
+      height: 10vh;
+      width: 120px;
+    }
 
     .team-name {
       color: $color-main;

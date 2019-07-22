@@ -37,7 +37,11 @@ class DisplayPincode extends Component {
       <div className="pincode-container">
         <div className="display-text">
           <div>Game pincode</div>
-          <span>{pincode}</span>
+          <span className="pincode">{pincode}</span>
+          <span className="pincode-description">
+            In order to be able to join a game room you need to obtain a PINCODE from the creators of that game room.
+            Also, Add a nickname for your team so we know what to display on the scoreboard. 
+          </span>
         </div>
       </div>
     )

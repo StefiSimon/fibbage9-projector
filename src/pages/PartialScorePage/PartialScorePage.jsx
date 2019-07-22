@@ -8,6 +8,8 @@ import piechartSvg from '../../assets/img/piechart.svg';
 import './PartialScorePage.scss';
 
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
+import Animal from '../../shared/Animal/Animal';
+import FloatBaloon from '../../components/FloatBaloon/FloatBaloon';
 
 const { game } = databaseRefs;
 
@@ -62,21 +64,29 @@ class PartialScorePage extends Component {
     return this.sortPlayersByScore(playersData);
   }
 
+  getTeamAnimal = () => {
+
+  }
+
   render() {
     return (
       <div className="partial-score-page">
+        <FloatBaloon style={{ top: "40%", right: "80%", width: '250px' }} className="up" />
         <img src={piechartSvg} className="score-img" alt="piechart" />
         <div className="title"> 
           Scores so far
         </div>
         {this.getPlayersInfo().map(el => (
           <div className="team-card">
-            <div className="team-name">{el.nickname}</div>
-            <div className="score">
-              <span>
-                {`${el.totalScore}  `} 
-              </span>
-              points
+            <Animal animal={el.animal.animal} className="animal-svg" />
+            <div className="team-info">
+              <div style={{ color: el.animal.color }} className="team-name">{el.nickname}</div>
+              <div className="score">
+                <span style={{ color: el.animal.color }}>
+                  {`${el.totalScore}  `} 
+                </span>
+                points
+              </div>
             </div>
           </div>
         ))}

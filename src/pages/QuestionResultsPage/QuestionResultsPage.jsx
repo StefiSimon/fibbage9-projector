@@ -7,6 +7,7 @@ import './QuestionResultsPage.scss';
 
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
 import CheckMarks from '../../components/CheckMarks/CheckMarks';
+import Animal from '../../shared/Animal/Animal';
 
 const { game, question } = databaseRefs;
 
@@ -78,7 +79,7 @@ class QuestionResultsPage extends Component {
     this.questionRef.off("value");
   }
 
-  getAuthorTeam = (teamId) => {
+  getAuthorTeamName = (teamId) => {
     const { players } = this.state;
     const authorPlayer = players.find(player => player[0] === teamId);
 
@@ -88,12 +89,46 @@ class QuestionResultsPage extends Component {
     return data.nickname ? data.nickname : '';
   }
 
+  getAuthorTeamAnimal = (teamId) => {
+    const { players } = this.state;
+    const authorPlayer = players.find(player => player[0] === teamId);
+
+    if (!authorPlayer) return '';
+
+    const [key, data] = authorPlayer;
+    return data.animal ? data.animal.animal : '';
+  }
+
+  getAuthorTeamColor = (teamId) => {
+    const { players } = this.state;
+    const authorPlayer = players.find(player => player[0] === teamId);
+
+    if (!authorPlayer) return '';
+
+    const [key, data] = authorPlayer;
+    return data.animal ? data.animal.color : '';
+  }
+
   getVoterTeams = (teamIds) => {
     if (teamIds) {
       const teamIdsArray = getToupleFromSnapshot(teamIds);
-      return teamIdsArray.map(team => team[1] ? team[1] : '');
+      return teamIdsArray.map(team => {
+        const [key, data] = team;
+        return data.name ? this.getAuthorTeamName(data.name) : '';
+      });
     }
-    return ['this answer has no votes'];
+    return ['no votes'];
+  }
+
+  getVoterAnimals = (teamIds) => {
+    if (teamIds) {
+      const teamIdsArray = getToupleFromSnapshot(teamIds);
+      return teamIdsArray.map(team => {
+        const [key, data] = team;
+        return data.animal || '';
+      });
+    }
+    return ['no animals :('];
   }
 
   render() {
@@ -117,12 +152,18 @@ class QuestionResultsPage extends Component {
           </div>
           {fakeAnswers.map((answer, i) => (
             <div key={i} className="answer-info-card">
-              <div className="answer">{answer.value}</div>
-              <div className="author">Added by <span>{this.getAuthorTeam(answer.authorTeam)}</span></div>
-              <div className="team-votes">
-                {`Voted by ${answer.voteCount} teams: `} 
-                {this.getVoterTeams(answer.votedBy).map((team, i) => <span key={i}>{`${ team } `}</span>)}
+              <div className="answer-info">
+                <div style={{ color: this.getAuthorTeamColor(answer.authorTeam) }} className="answer">
+                  {answer.value}
+                </div>
+                <div className="author">Added by <span style={{ color: this.getAuthorTeamColor(answer.authorTeam) }}>{this.getAuthorTeamName(answer.authorTeam)}</span></div>
+                <div className="team-votes">
+                  {`Voted by ${answer.voteCount} team(s): `} 
+                  {this.getVoterTeams(answer.votedBy).map((team, i) => <span key={i}>{`${ team } `}</span>)}
+                  {this.getVoterAnimals(answer.votedBy).map((animal, i) => <Animal className="voter-animal" key={i} animal={animal} />)}
+                </div>
               </div>
+              <Animal animal={this.getAuthorTeamAnimal(answer.authorTeam)} className="animal-svg" />
             </div>
           ))}
         </div>
