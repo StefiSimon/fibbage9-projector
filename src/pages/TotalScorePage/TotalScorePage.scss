@@ -1,23 +1,42 @@
-@import 'settings.colors.scss';
-@import 'settings.global.scss';
+@import 'settings';
 
 .total-score-page {
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  bottom: 24px;
 
-  .score-header {
+    .score-header {
     font-size: 1.5em;
     margin: 1em 0;
   }
 
-  .winner-group, .team-group {
-    background-color: white;
-    padding: 16px 32px;
-    border-radius: 10px;
-    margin-bottom: 1.5em;
-
-    div:first-of-type {
-      color: $color-main;
-      font-size: 2em;
-      font-weight: $global-weight-bold;
+  .card.cancer {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+  
+    .card--left {
+      text-align: left;
+    }
+  }
+  
+  .cancer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .grid-item {
+    display: inline-flex;
+    width: calc(50% - #{$global-spacing-unit-tiny});
+    
+    &:nth-child(odd) {
+      margin-right: $global-spacing-unit-tiny;
+    }
+  
+    &:nth-child(even) {
+      margin-left: $global-spacing-unit-tiny;
     }
   }
 }
