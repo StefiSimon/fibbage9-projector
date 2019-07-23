@@ -3,7 +3,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import useInterval from '@use-it/interval';
 
 import 'react-circular-progressbar/dist/styles.css';
-import './Timer.scss';
+import './timer.scss';
 
 export const Timer = ({
   endTime,
