@@ -48,7 +48,7 @@ class PartialScorePage extends Component {
   }
 
   componentWillUnmount() {
-    this.gameRef.on("value");
+    this.gameRef.off("value");
     this.gameRef.child("/currentScreen").off("value");
     this.gameRef.child("/players").off("value");
   }

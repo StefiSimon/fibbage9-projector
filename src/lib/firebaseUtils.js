@@ -2,7 +2,7 @@ import { databaseRefs } from './refs';
 
 const { timer } = databaseRefs;
 
-export const getToupleFromSnapshot = (snapshot) => Object.entries(snapshot);
+export const getToupleFromSnapshot = (snapshot) => snapshot ? Object.entries(snapshot) : [];
 
 export const startTimerForGame = (gameId) => {
   const timerRef = timer(gameId);

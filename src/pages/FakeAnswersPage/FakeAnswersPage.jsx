@@ -31,8 +31,8 @@ class FakeAnswersPage extends Component {
     const removeEmpty = allAnswers.filter(answer => !!answer);
     const sorted = removeEmpty.sort((a, b) => {
       if (a && b) {
-        const firstValue = a.value ? a.value.toLowerCase() : a[1].value;
-        const secondValue = b.value ? b.value.toLowerCase() : b[1].value;
+        const firstValue = a.value ? a.value.toLowerCase() : a[0].value;
+        const secondValue = b.value ? b.value.toLowerCase() : b[0].value;
   
         if (firstValue < secondValue) {
           return -1;
