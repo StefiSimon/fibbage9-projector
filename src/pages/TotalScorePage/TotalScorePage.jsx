@@ -24,6 +24,11 @@ class TotalScorePage extends Component {
     return players.map(el => el[1]);
   };
 
+  redirectToHome = () => {
+    const { history } = this.props;
+    history.push('/');
+  }
+
   sortPlayersByScore = players =>
     players.sort((player1, player2) => player2.totalScore - player1.totalScore);
 
@@ -145,6 +150,7 @@ class TotalScorePage extends Component {
     const { sortedPlayers } = this.state;
     return (
       <div className="total-score-page">
+        <div className="start-new-game" onClick={this.redirectToHome}>Start new game</div>
         {this.renderListOfPlayers()}
       </div>
     );

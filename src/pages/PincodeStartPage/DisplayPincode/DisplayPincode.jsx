@@ -32,11 +32,12 @@ class DisplayPincode extends Component {
   }
 
   render() {
-    const { pincode } = this.props;
+    const { pincode, url } = this.props;
     return (
       <div className="pincode-container">
         <div className="display-text">
-          <div>Game pincode</div>
+          <div>Game pincode and URL</div>
+          <span className="url">{url}</span>
           <span className="pincode">{pincode}</span>
           <span className="pincode-description">
             In order to be able to join a game room you need to obtain a PINCODE from the creators of that game room.

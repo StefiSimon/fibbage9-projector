@@ -13,8 +13,9 @@ const { games } = databaseRefs;
 class PincodeStartPage extends Component {
   state = {
     activeGames: [],
-    hasPincode: false,
+    hasPincodeAndUrl: false,
     pincode: 0,
+    url: '',
     gameId: '',
     rocketActive: false
   }
@@ -45,7 +46,7 @@ class PincodeStartPage extends Component {
     this.setState({ activeGames });
   };
 
-  handleInsertPincode = ({ pincode }, actions) => {
+  handleInsertElements = ({ pincode, url }, actions) => {
     let gameToJoin;
     const { activeGames } = this.state;
     const pincodeMatchGame = activeGames
@@ -55,7 +56,7 @@ class PincodeStartPage extends Component {
         if (data.pincode === pincode) {
           gameToJoin = key;
           this.setState({
-            gameId: key
+            gameId: key,
           })
           return key;
         }
@@ -64,10 +65,11 @@ class PincodeStartPage extends Component {
       })
       .filter(Boolean);
 
-    if (pincodeMatchGame.length === 1) {
+    if (pincodeMatchGame.length === 1 && url && url.length > 0) {
       this.setState({
-        hasPincode: true,
-        pincode
+        hasPincodeAndUrl: true,
+        pincode,
+        url
       })
     } else {
       actions.setFieldError(
@@ -79,16 +81,16 @@ class PincodeStartPage extends Component {
 
   render() {
     const { history } = this.props;
-    const { hasPincode, pincode, gameId } = this.state;
+    const { hasPincodeAndUrl, pincode, gameId, url } = this.state;
     return (
       <div className="startpage-container">
         <Rocket active={false} />
         <Moon top="30px" right="10px" width="75px" height="75px" />
         <Moon top="50px" left="50%" />
         <Moon left="10%" top="350px" width="50px" height="50px" />
-        { hasPincode ? 
-            <DisplayPincode history={history} pincode={pincode} gameId={gameId} /> : 
-            <EnterPincode onSubmit={this.handleInsertPincode} />
+        { hasPincodeAndUrl ? 
+            <DisplayPincode history={history} pincode={pincode} gameId={gameId} url={url} /> : 
+            <EnterPincode onSubmit={this.handleInsertElements} />
         }
       </div>
     )

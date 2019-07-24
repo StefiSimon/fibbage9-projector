@@ -5,6 +5,7 @@ import answerSvg from '../../assets/img/answer_svg.svg';
 import { getToupleFromSnapshot } from '../../lib/firebaseUtils';
 import Timer from '../../shared/Timer';
 import './FakeAnswersPage.scss';
+import { isEmptyChildren } from 'formik';
 
 const { game, question } = databaseRefs;
 
