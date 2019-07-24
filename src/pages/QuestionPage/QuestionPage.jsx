@@ -77,10 +77,7 @@ class QuestionPage extends Component {
     return (
       <Fragment>
         {endTimeDate &&
-          <Timer
-            endTime={endTimeDate}
-            onTimerEnd={() => this.setState({ endTimeDate: '' })}
-          />
+          <Timer endTime={endTimeDate} />
         }
         <div className="question-container">
           <QuestionMark style={{ top: "30px", right: "30px" }} className="down"></QuestionMark>
