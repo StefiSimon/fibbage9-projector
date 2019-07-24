@@ -131,9 +131,17 @@ class QuestionResultsPage extends Component {
     return ['no animals :('];
   }
 
+  getCorrectAnswerVotes = (votedBy) => {
+    const teamIds = getToupleFromSnapshot(votedBy);
+    return teamIds.map(id => {
+      const [key, data] = id;
+      return data;
+    })
+  }
+
   render() {
-    const { currentQuestion, fakeAnswers, correctAnswer: { value, votedBy } } = this.state;
-    const correctAnswerVotes = this.getVoterTeams(votedBy);
+    const { currentQuestion, fakeAnswers, correctAnswer: { value, votedBy, voteCount } } = this.state;
+    const correctAnswerVotes = this.getCorrectAnswerVotes(votedBy);
     return (
       <div>
         <img src={checkmarkSvg} alt="checkmark" className="image" />
@@ -146,8 +154,13 @@ class QuestionResultsPage extends Component {
           <div className="answer-info-card correct">
             <div className="answer">{value}</div>
             <div className="team-votes">
-            {`Voted by ${correctAnswerVotes.length} teams: `} 
-              {correctAnswerVotes.map((team, i) => <span key={i}>{`${ team } `}</span>)}
+              {`Voted by ${voteCount ? voteCount : 0} teams`} 
+              {correctAnswerVotes.map((team, i) => (
+                <Fragment>
+                  <span> </span>
+                  <Animal className="voter-animal" animal={team.animal} />
+                </Fragment>)
+              )}
             </div>
           </div>
           {fakeAnswers.map((answer, i) => (
@@ -158,7 +171,7 @@ class QuestionResultsPage extends Component {
                 </div>
                 <div className="author">Added by <span style={{ color: this.getAuthorTeamColor(answer.authorTeam) }}>{this.getAuthorTeamName(answer.authorTeam)}</span></div>
                 <div className="team-votes">
-                  {`Voted by ${answer.voteCount} team(s): `} 
+                  {`Voted by ${answer.voteCount} team(s) `} 
                   {this.getVoterTeams(answer.votedBy).map((team, i) => <span key={i}>{`${ team } `}</span>)}
                   {this.getVoterAnimals(answer.votedBy).map((animal, i) => <Animal className="voter-animal" key={i} animal={animal} />)}
                 </div>
