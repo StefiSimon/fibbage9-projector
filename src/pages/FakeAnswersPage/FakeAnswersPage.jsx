@@ -96,10 +96,7 @@ class FakeAnswersPage extends Component {
     return (
       <Fragment>
         {endTimeDate &&
-          <Timer
-            endTime={endTimeDate}
-            onTimerEnd={() => this.setState({ endTimeDate: '' })}
-          />
+          <Timer endTime={endTimeDate} />
         }
         <div className="answers-page">
         <div className="question">
