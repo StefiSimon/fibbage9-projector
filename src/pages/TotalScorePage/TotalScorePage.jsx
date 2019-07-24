@@ -29,7 +29,7 @@ class TotalScorePage extends Component {
   redirectToHome = () => {
     const { history } = this.props;
     history.push('/');
-  }
+  };
 
   sortPlayersByScore = players =>
     players.sort((player1, player2) => player2.totalScore - player1.totalScore);
@@ -54,7 +54,7 @@ class TotalScorePage extends Component {
         return (
           <Fragment key={player.animal.animal}>
             {index <= 1 && (
-              <div className="winner o-layout--center o-layout--stretch u-1/1">
+              <div className="winner o-layout--center o-layout--stretch u-1/2">
                 {index === 0 && <img src={FirstPlaceCrown} alt="first-place" />}
                 {index === 1 && <img src={SecondPlaceCrown} alt="second-place" />}
 
@@ -173,7 +173,9 @@ class TotalScorePage extends Component {
     const { sortedPlayers } = this.state;
     return (
       <div className="total-score-page">
-        <div className="start-new-game" onClick={this.redirectToHome}>Start new game</div>
+        <div className="start-new-game" onClick={this.redirectToHome}>
+          Start new game
+        </div>
         {this.renderListOfPlayers()}
       </div>
     );

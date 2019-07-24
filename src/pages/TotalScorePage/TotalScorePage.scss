@@ -1,7 +1,7 @@
 @import 'settings';
 
 .total-score-page {
-  width: 50%;
+  // width: 50%;
   margin: 0 auto;
   position: relative;
   bottom: 24px;
@@ -19,37 +19,46 @@
     }
   }
 
-    .score-header {
+  .card {
+    border: 0 !important;
+  }
+
+  .winner {
+    margin: 0 auto;
+  }
+
+  .score-header {
     font-size: 1.5em;
     margin: 1em 0;
   }
 
   .card.cancer {
     display: flex;
-    align-items: center; 
+    align-items: center;
     justify-content: space-between;
-  
+    padding: 24px;
+
     .card--left {
       text-align: left;
     }
   }
-  
+
   .cancer-container {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+
   .grid-item {
     display: inline-flex;
-    width: calc(50% - #{$global-spacing-unit-tiny});
-    
-    &:nth-child(odd) {
-      margin-right: $global-spacing-unit-tiny;
-    }
-  
-    &:nth-child(even) {
-      margin-left: $global-spacing-unit-tiny;
-    }
+    width: calc(25% - #{$global-spacing-unit-small});
+
+    // &:nth-child(even) {
+    margin-right: $global-spacing-unit-tiny;
+    // }
+
+    // &:nth-child(odd) {
+    margin-left: $global-spacing-unit-tiny;
+    // }
   }
 }
