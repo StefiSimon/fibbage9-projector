@@ -139,6 +139,14 @@ class QuestionResultsPage extends Component {
     })
   }
 
+  orderByVoteCount = (fakeAnswers) => {
+    return fakeAnswers.sort((a, b) => {
+      if (a && b) {
+        return b.voteCount - a.voteCount;
+      }
+    })
+  }
+
   render() {
     const { currentQuestion, fakeAnswers, correctAnswer: { value, votedBy, voteCount } } = this.state;
     const correctAnswerVotes = this.getCorrectAnswerVotes(votedBy);
@@ -163,7 +171,7 @@ class QuestionResultsPage extends Component {
               )}
             </div>
           </div>
-          {fakeAnswers.map((answer, i) => (
+          {this.orderByVoteCount(fakeAnswers).map((answer, i) => (
             <div key={i} className="answer-info-card">
               <div className="answer-info">
                 <div style={{ color: this.getAuthorTeamColor(answer.authorTeam) }} className="answer">
