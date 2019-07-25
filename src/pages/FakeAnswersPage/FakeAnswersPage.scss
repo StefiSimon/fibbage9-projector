@@ -2,6 +2,7 @@
 @import 'settings.global.scss';
 
 .answers-page {
+  width: 50%;
   margin: 0 auto;
   position: relative;
   bottom: 24px;
@@ -19,11 +20,11 @@
   }
 
   .answers {
-    display: grid;
-    grid-template-rows: repeat(6, 100px);
-    grid-gap: 10px;
-    grid-auto-flow: column;
-    grid-auto-columns: auto auto;
+    // display: grid;
+    // grid-template-rows: repeat(6, 100px);
+    // grid-gap: 10px;
+    // grid-auto-flow: column;
+    // grid-auto-columns: auto auto;
 
     width: 100%;
     .fake-answer {
@@ -32,7 +33,7 @@
       font-size: 2em;
       color: $color-main;
       margin-bottom: 16px;
-      margin-right: 10px;
+      // margin-right: 10px;
       font-weight: $global-weight-bold;
 
       div {
