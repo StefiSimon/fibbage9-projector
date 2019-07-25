@@ -9,13 +9,13 @@ body {
   width: 100vw;
   height: 100vh;
 
-  .timer-wrapper {
-    right: 20%;
-    top: 10%;
-  }
+  // .timer-wrapper {
+  //   right: 20%;
+  //   top: 10%;
+  // }
 
   &.bg-gray {
-    background-color:  $default-color-background;
+    background-color: $default-color-background;
   }
 
   @include mq($from: tablet) {

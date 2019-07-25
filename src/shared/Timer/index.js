@@ -7,33 +7,36 @@ import './timer.scss';
 
 export const Timer = ({
   endTime,
-  size = '70px',
-  onTimerTick = () => { },
-  onTimerEnd = () => { }
+  size = '100px',
+  onTimerTick = () => {},
+  onTimerEnd = () => {}
 }) => {
-  const isValidTime = endTime && (endTime - Date.now() > 0);
+  const isValidTime = endTime && endTime - Date.now() > 0;
   const [secondsLeft, setLeftTime] = useState(isValidTime ? 29 : 0);
 
-  useInterval(() => {
-    const remainingTime = Math.max(0, endTime - Date.now());
-    onTimerTick(remainingTime, endTime, Date.now());
-    setLeftTime(new Date(remainingTime).getSeconds());
+  useInterval(
+    () => {
+      const remainingTime = Math.max(0, endTime - Date.now());
+      onTimerTick(remainingTime, endTime, Date.now());
+      setLeftTime(new Date(remainingTime).getSeconds());
 
-    if (endTime <= Date.now()) {
-      onTimerEnd();
-    }
-  }, isValidTime ? 1000 : null);
+      if (endTime <= Date.now()) {
+        onTimerEnd();
+      }
+    },
+    isValidTime ? 1000 : null
+  );
 
-return (
-  <div className="timer-wrapper" style={{ width: size, height: size }}>
-    <CircularProgressbar
-      text={secondsLeft}
-      value={100 * secondsLeft / 30}
-      strokeWidth={12}
-      counterClockwise
-    />
-  </div>
-)
+  return (
+    <div className="timer-wrapper" style={{ width: size, height: size }}>
+      <CircularProgressbar
+        text={secondsLeft}
+        value={(100 * secondsLeft) / 30}
+        strokeWidth={15}
+        counterClockwise
+      />
+    </div>
+  );
 };
 
 export default Timer;

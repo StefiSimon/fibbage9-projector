@@ -26,7 +26,7 @@
     bottom: 10px;
     right: 10px;
     z-index: 0;
-    opacity: 0.7;  
+    opacity: 0.7;
   }
 
   .title {
@@ -36,7 +36,8 @@
   }
 
   .card-container {
-    column-count: 2;
+    // display: flex;
+    // flex-wrap: wrap;
   }
 
   .team-card {
@@ -48,6 +49,8 @@
     z-index: 10;
     display: flex;
     align-items: center;
+    // width: calc(50% - 12px);
+    // margin: 6px;
 
     .animal-svg {
       height: 10vh;
@@ -59,7 +62,7 @@
       font-size: 1.6em;
       font-weight: $global-weight-bold;
     }
-    
+
     .score {
       position: relative;
       font-size: 1.2em;
